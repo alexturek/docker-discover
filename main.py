@@ -53,8 +53,10 @@ def get_services():
 
 def generate_config(services):
     template = env.get_template('haproxy.cfg.tmpl')
+    new_config = template.render(services=services)
     with open("/etc/haproxy.cfg", "w") as f:
-        f.write(template.render(services=services))
+        f.write(new_config)
+    print new_config
 
 if __name__ == "__main__":
     current_services = {}
